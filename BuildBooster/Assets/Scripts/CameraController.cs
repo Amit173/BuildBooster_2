@@ -34,12 +34,9 @@ public class CameraController : MonoBehaviour
     private float minZoom;
     [SerializeField]
     private float maxZoom;
-
-    private float panConstant = 0;
     private void Start()
     {
         zoom = camera.fieldOfView;
-        
     }
 
     void Update()
@@ -55,13 +52,7 @@ public class CameraController : MonoBehaviour
             }
 
         }
-        Zoom();
-        OrbitAround();
-        Pan();
-    }
 
-    public void OrbitAround()
-    {
         float mouseX = TF.touchDist.x * mouseDragSensitivity;
         float mouseY = -TF.touchDist.y * mouseDragSensitivity;
 
@@ -73,21 +64,16 @@ public class CameraController : MonoBehaviour
         Vector3 nextRotation = new Vector3(rotationX, rotationY);
         currentRotation = Vector3.SmoothDamp(currentRotation, nextRotation, ref smoothVelocity, smoothTime);
         transform.localEulerAngles = currentRotation;
-        transform.position = target.position - (transform.forward * (distanceFromTarget + zoom));
-        
+        transform.position = target.position - (transform.forward * (distanceFromTarget));
+
+        Zoom();
     }
-    public void Pan()
-    {
-        if(Input.GetMouseButtonDown(2))
-        {
-            panConstant = panConstant + 1;
-        }
-    }
+
     public void Zoom()
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         zoom -= scroll * mouseScrollSensitivity;
         zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
-       // camera.fieldOfView = Mathf.SmoothDamp(camera.fieldOfView, zoom, ref zoomVeclocity, 0.25f);
+        camera.fieldOfView = Mathf.SmoothDamp(camera.fieldOfView, zoom, ref zoomVeclocity, 0.25f);
     }
 }
