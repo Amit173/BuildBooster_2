@@ -13,6 +13,8 @@ public class Manager : MonoBehaviour
     public float roofPitch;
     [SerializeField]
     private Building wareHouse;
+
+    [SerializeField] GameObject addEntityScript;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -50,6 +52,7 @@ public class Manager : MonoBehaviour
     public void MakeBuilding()
     {
         wareHouse.BuildingMaker(width,length,height,roofPitch);
+        addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
     }
 
     public void ChangeColor(string colorCode)

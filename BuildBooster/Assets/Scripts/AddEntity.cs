@@ -17,6 +17,11 @@ public class AddEntity : MonoBehaviour
     [SerializeField] Toggle westToggle;
     [SerializeField] Toggle southToggle;
 
+    [SerializeField] string northWallName;
+    [SerializeField] string eastWallName;
+    [SerializeField] string westWallName;
+    [SerializeField] string southWallName;
+
     [SerializeField] Button addDoor;
     [SerializeField] Button removeDoor;
 
@@ -31,19 +36,6 @@ public class AddEntity : MonoBehaviour
 
     private void Start()
     {
-        north = new Wall();
-        east = new Wall();
-        south = new Wall();
-        west = new Wall();
-
-        currentWall = new Wall();
-
-        north.SetWallReference(building.transform.Find("North").gameObject);
-        east.SetWallReference(building.transform.Find("East").gameObject);
-        south.SetWallReference(building.transform.Find("South").gameObject);
-        west.SetWallReference(building.transform.Find("West").gameObject);
-        currentWall = north; // default
-
         // UI
         northToggle.isOn = true;
         eastToggle.isOn = false;
@@ -63,6 +55,24 @@ public class AddEntity : MonoBehaviour
 
         addWindow.onClick.AddListener(AddWindow);
         removeWindow.onClick.AddListener(RemoveWindow);
+    }
+
+    public void InitiializeWalls()
+    {
+        north = new Wall();
+        east = new Wall();
+        south = new Wall();
+        west = new Wall();
+
+        currentWall = new Wall();
+
+        north.SetWallReference(building.transform.Find(northWallName).gameObject);
+        east.SetWallReference(building.transform.Find(eastWallName).gameObject);
+        south.SetWallReference(building.transform.Find(southWallName).gameObject);
+        west.SetWallReference(building.transform.Find(westWallName).gameObject);
+        currentWall = north; // default
+
+        Debug.Log("walls initialized");
     }
 
     #region SideToggles
