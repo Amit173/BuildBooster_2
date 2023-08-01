@@ -56,6 +56,7 @@ public class Manager : MonoBehaviour
     {
         currentSelectedPart.ChangeColor(colorCode);
     }
+   
     //Method For Java fuction call
 //    void CallJavaScriptFunction(bool b)
 //    {

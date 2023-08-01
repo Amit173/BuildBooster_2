@@ -34,6 +34,9 @@ public class CameraController : MonoBehaviour
     private float minZoom;
     [SerializeField]
     private float maxZoom;
+
+    [SerializeField]
+    private float zoomFactor;
     private void Start()
     {
         zoom = camera.fieldOfView;
@@ -63,8 +66,8 @@ public class CameraController : MonoBehaviour
 
         Vector3 nextRotation = new Vector3(rotationX, rotationY);
         currentRotation = Vector3.SmoothDamp(currentRotation, nextRotation, ref smoothVelocity, smoothTime);
-        transform.localEulerAngles = currentRotation;
-        transform.position = target.position - (transform.forward * (distanceFromTarget));
+        //transform.localEulerAngles = currentRotation;
+        //transform.position = target.position - (transform.forward * (distanceFromTarget));
 
         Zoom();
     }
@@ -74,6 +77,8 @@ public class CameraController : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         zoom -= scroll * mouseScrollSensitivity;
         zoom = Mathf.Clamp(zoom, minZoom, maxZoom);
-        camera.fieldOfView = Mathf.SmoothDamp(camera.fieldOfView, zoom, ref zoomVeclocity, 0.25f);
+        
+        transform.localEulerAngles = currentRotation;
+        transform.position = target.position - (transform.forward * (distanceFromTarget) * zoom);
     }
 }

@@ -337,9 +337,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300869882}
-        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
-        m_MethodName: ChangeColor
+      - m_Target: {fileID: 1890789480515676339}
+        m_TargetAssemblyTypeName: Building, Assembly-CSharp
+        m_MethodName: SetRoofColor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -827,7 +827,7 @@ MonoBehaviour:
   smoothTime: 0.2
   rotationXMinMax: {x: 1, y: 89}
   minZoom: 0
-  maxZoom: 50
+  maxZoom: 200
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2298,3 +2298,6 @@ MonoBehaviour:
   roofPitch: 30
   vertexID: 8
   tempPointer: {fileID: 7867787568313327181, guid: 9f5fdc4e0bdd73543a2d203f64127116, type: 3}
+  m_Wall: {fileID: 2100000, guid: 98fc87ea28bd4f8448b334749c88906c, type: 2}
+  m_Roof: {fileID: 2100000, guid: 59ab38de516525b4fa3f4d4e56cff8e6, type: 2}
+  m_Trim: {fileID: 2100000, guid: 10570b2fb3b09e545bccea3cca63cb6c, type: 2}
