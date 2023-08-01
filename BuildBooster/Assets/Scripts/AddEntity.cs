@@ -210,7 +210,33 @@ public class AddEntity : MonoBehaviour
         removeDoor.interactable = true;
 
         // 3D
-        InstantiateDoor(currentWall.wallReference.transform.localPosition, currentWall.wallReference.transform.localEulerAngles);
+        Vector3 currentWallPosition = currentWall.wallReference.transform.localPosition;
+        Vector3 offset = Vector3.zero;
+
+        if (currentWall == north)
+        {
+            Debug.Log("north");
+            // offset = something;
+        }
+        else if (currentWall == east)
+        {
+            Debug.Log("east");
+            // offset = something;
+        }
+        else if (currentWall == south)
+        {
+            Debug.Log("south");
+            // offset = something;
+        }
+        else if (currentWall == west)
+        {
+            Debug.Log("west");
+            // offset = something;
+        }
+
+        Vector3 finalPosition = currentWallPosition + offset;
+
+        InstantiateDoor(finalPosition, currentWall.wallReference.transform.localEulerAngles);
 
         if (doorWidth.onValueChanged.GetPersistentEventCount() == 0)
         {
