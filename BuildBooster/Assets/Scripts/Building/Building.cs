@@ -245,7 +245,7 @@ public class Building : MonoBehaviour
         Parent.transform.parent = this.transform;
         if (width % 2 == 0)
         {
-            for (int i = 0; i < width / 2-1; i++)
+            for (int i = 0; i < width / 2; i++)
             {
                 // Your existing code for calculating vertex positions
                 float eH = (height + (Mathf.Tan(roofPitch * Mathf.Deg2Rad) * (i + 1))) * positionMarker;
@@ -287,7 +287,7 @@ public class Building : MonoBehaviour
                 m_Wall.SetTexture("_BumpMap", Resources.Load<Texture2D>("tin_normal"));
             }
 
-            for (int i = 0; i < width / 2-1; i++)
+            for (int i = 0; i < width / 2; i++)
             {
                 // Your existing code for calculating vertex positions
                 float eH = (height + (Mathf.Tan(roofPitch * Mathf.Deg2Rad) * (i + 1))) * positionMarker;
@@ -320,7 +320,8 @@ public class Building : MonoBehaviour
                 meshRenderer.material = m_Wall;
                 m_Wall.SetTexture("_BumpMap", Resources.Load<Texture2D>("tin_normal"));
             }
-        }else
+        }
+        else
         {
             for (int i = 0; i < width / 2 - 1; i++)
             {

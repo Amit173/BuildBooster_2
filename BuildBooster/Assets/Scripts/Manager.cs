@@ -66,8 +66,11 @@ public class Manager : MonoBehaviour
         wareHouse.BuildingMaker(width,length,height,roofPitch);
     }
 
-    public void ChangeColor(string partName, string colorCode)
+    public void ChangeColor(string str)
     {
+        string[] arr = str.Split("_");
+        string partName = arr[0];
+        string colorCode = arr[1];
         switch(partName)
         {
             case "Roof":
@@ -93,8 +96,11 @@ public class Manager : MonoBehaviour
         }
     }
 
-    public void ChangeTexture(string partName, string textureName)
+    public void ChangeTexture(string str)
     {
+        string[] arr = str.Split("_");
+        string partName = arr[0];
+        string textureName = arr[1];
         switch (partName)
         {
             case "Roof":
