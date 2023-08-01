@@ -20,6 +20,7 @@ public class Building : MonoBehaviour
     public Material m_Wall;
     public Material m_Roof;
     public Material m_Trim;
+    public Material m_Wainscot;
 
     public void GiveExtent(GameObject obj)
     {
@@ -45,6 +46,7 @@ public class Building : MonoBehaviour
         WestWallMaker();
         SouthWallMaker();
         RoofMaker();
+        WainscotMaker();
     }
 
     private void SouthWallMaker()
@@ -520,6 +522,37 @@ public class Building : MonoBehaviour
         }
     }
 
+    public void WainscotMaker()
+    {
+        GameObject Parent = new GameObject("Wainscot");
+        Parent.transform.parent = this.transform;
+        for (int i = 0; i < length; i++)
+        {
+            GameObject leftWainscotPart = Instantiate(tin, new Vector3(-0.01f, 0, positionMarker * i), Quaternion.Euler(new Vector3(0, 90, 0)), Parent.transform);
+            leftWainscotPart.transform.localScale = new Vector3(1, (height/6), 1);
+            leftWainscotPart.GetComponent<MeshRenderer>().material = m_Wainscot;
+            m_Wainscot.SetTexture("_BumpMap", Resources.Load<Texture2D>("tin_normal"));
+
+            GameObject rightWainscotPart = Instantiate(tin, new Vector3(width * positionMarker + 0.01f, 0, positionMarker * (length - i)), Quaternion.Euler(new Vector3(0, -90, 0)), Parent.transform);
+            rightWainscotPart.transform.localScale = new Vector3(1, (height/6), 1);
+            rightWainscotPart.GetComponent<MeshRenderer>().material = m_Wainscot;
+            m_Wainscot.SetTexture("_BumpMap", Resources.Load<Texture2D>("tin_normal"));
+        }
+
+        for(int i = 0; i < width; i++)
+        {
+            GameObject frontWainscotPart = Instantiate(tin, new Vector3(positionMarker * (width-i), 0, -0.01f), Quaternion.Euler(new Vector3(0, 0, 0)), Parent.transform);
+            frontWainscotPart.transform.localScale = new Vector3(1, (height / 6), 1);
+            frontWainscotPart.GetComponent<MeshRenderer>().material= m_Wainscot;
+            m_Wainscot.SetTexture("_BumpMap", Resources.Load<Texture2D>("tin_normal"));
+
+            GameObject backWainscotPart = Instantiate(tin, new Vector3(positionMarker * i, 0, length*positionMarker + 0.01f), Quaternion.Euler(new Vector3(0, 180, 0)), Parent.transform);
+            backWainscotPart.transform.localScale = new Vector3(1, (height / 6), 1);
+            backWainscotPart.GetComponent<MeshRenderer>().material = m_Wainscot;
+            m_Wainscot.SetTexture("_BumpMap", Resources.Load<Texture2D>("tin_normal"));
+        }
+    }
+
     public void SetWallColor(string colorCode)
     {
         Color newColor = new Color();
@@ -540,4 +573,25 @@ public class Building : MonoBehaviour
         ColorUtility.TryParseHtmlString(colorCode, out newColor);
         m_Trim.SetColor("_Color", newColor);
     }
+
+    public void SetWainscotColor(string colorCode)
+    {
+        Color newColor = new Color();
+        ColorUtility.TryParseHtmlString(colorCode, out newColor);
+        m_Wainscot.SetColor("_Color", newColor);
+    }
+
+    public void SetWallTexture(string textureName)
+    {
+        m_Wall.SetTexture("_MainTex", Resources.Load<Texture2D>(textureName));
+    }
+    public void SetRoofTexture(string textureName)
+    {
+        m_Roof.SetTexture("_MainTex", Resources.Load<Texture2D>(textureName));
+    }
+    public void SetWainscotTexture(string textureName)
+    {
+        m_Wainscot.SetTexture("_MainTex", Resources.Load<Texture2D>(textureName));
+    }
+
 }

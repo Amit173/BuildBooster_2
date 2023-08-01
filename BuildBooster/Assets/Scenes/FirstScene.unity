@@ -253,6 +253,10 @@ MonoBehaviour:
   height: 30
   roofPitch: 30
   wareHouse: {fileID: 1890789480515676339}
+  m_Wall: {fileID: 0}
+  m_Roof: {fileID: 0}
+  m_Trim: {fileID: 0}
+  m_Wainscot: {fileID: 0}
 --- !u!1 &321634195
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &934146656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,8 +830,9 @@ MonoBehaviour:
   distanceFromTarget: 15
   smoothTime: 0.2
   rotationXMinMax: {x: 1, y: 89}
-  minZoom: 0
+  minZoom: 1
   maxZoom: 200
+  zoomFactor: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2301,3 +2306,4 @@ MonoBehaviour:
   m_Wall: {fileID: 2100000, guid: 98fc87ea28bd4f8448b334749c88906c, type: 2}
   m_Roof: {fileID: 2100000, guid: 59ab38de516525b4fa3f4d4e56cff8e6, type: 2}
   m_Trim: {fileID: 2100000, guid: 10570b2fb3b09e545bccea3cca63cb6c, type: 2}
+  m_Wainscot: {fileID: 2100000, guid: 152626572f84a6342b7f64551b20969e, type: 2}

@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 Debug.Log(hit.collider.gameObject.name);
-                Manager.instance.SetCurrentPart(hit.collider.GetComponent<Part>());
+               // Manager.instance.SetCurrentPart(hit.collider.GetComponent<Part>());
             }
 
         }
