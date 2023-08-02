@@ -225,8 +225,8 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("north");
             finalPosition = new Vector3((Manager.instance.width/2)*positionMarker, 0 , 0);
-            sliderMin = 0;
-            sliderMax = Manager.instance.width * positionMarker;
+            sliderMin = int.Parse(doorWidth.text)*positionMarker;
+            sliderMax = Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
             sliderCurr = (Manager.instance.width / 2) * positionMarker;
             finalRot = new Vector3(0,90,0);
             // offset = something;
@@ -235,8 +235,8 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("east");
             finalPosition = new Vector3((Manager.instance.width ) * positionMarker, 0, (Manager.instance.length/2)*positionMarker);
-            sliderMin = 0;
-            sliderMax = Manager.instance.length * positionMarker;
+            sliderMin = int.Parse(doorWidth.text) * positionMarker;
+            sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
             sliderCurr = (Manager.instance.length / 2) * positionMarker;
             finalRot = new Vector3(0, 0, 0);
             // offset = something;
@@ -245,9 +245,9 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("south");
             finalPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, (Manager.instance.length) * positionMarker);
-            //doorLocationSlider.minValue = 0;
-            //doorLocationSlider.maxValue = Manager.instance.width * positionMarker;
-            //doorLocationSlider.value = (Manager.instance.width / 2) * positionMarker;
+            sliderMin = int.Parse(doorWidth.text) * positionMarker;
+            sliderMax= Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+            sliderCurr = (Manager.instance.width / 2) * positionMarker;
             finalRot = new Vector3(0, -90, 0);
             // offset = something;
         }
@@ -255,9 +255,9 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("west");
             finalPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
-            //doorLocationSlider.minValue = 0;
-            //doorLocationSlider.maxValue = Manager.instance.length * positionMarker;
-            //doorLocationSlider.value = (Manager.instance.length / 2) * positionMarker;
+            sliderMin = int.Parse(doorWidth.text) * positionMarker;
+            sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+            sliderCurr = (Manager.instance.length / 2) * positionMarker;
             finalRot = new Vector3(0, 180, 0);
             // offset = something;
         }
