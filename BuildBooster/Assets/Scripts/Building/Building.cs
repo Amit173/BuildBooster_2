@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using static TreeEditor.TextureAtlas;
 
 public class Building : MonoBehaviour
 {
@@ -559,40 +560,50 @@ public class Building : MonoBehaviour
         Color newColor = new Color();
         ColorUtility.TryParseHtmlString(colorCode, out newColor);
         m_Wall.SetColor("_Color", newColor);
+        m_Wall.SetTexture("_MainTex", null);
     }
-
     public void SetRoofColor(string colorCode)
     {
         Color newColor = new Color();
         ColorUtility.TryParseHtmlString(colorCode, out newColor);
         m_Roof.SetColor("_Color", newColor);
+        m_Roof.SetTexture("_MainTex", null);
     }
-
     public void SetTrimColor(string colorCode)
     {
         Color newColor = new Color();
         ColorUtility.TryParseHtmlString(colorCode, out newColor);
         m_Trim.SetColor("_Color", newColor);
+        m_Trim.SetTexture("_MainTex", null);
     }
-
     public void SetWainscotColor(string colorCode)
     {
         Color newColor = new Color();
         ColorUtility.TryParseHtmlString(colorCode, out newColor);
         m_Wainscot.SetColor("_Color", newColor);
+        m_Wainscot.SetTexture("_MainTex", null);
     }
 
     public void SetWallTexture(string textureName)
     {
+        Color newColor = new Color();
+        ColorUtility.TryParseHtmlString("FFFFFF", out newColor);
+        m_Wall.SetColor("_Color", newColor);
         m_Wall.SetTexture("_MainTex", Resources.Load<Texture2D>(textureName));
     }
     public void SetRoofTexture(string textureName)
     {
+        Color newColor = new Color();
+        ColorUtility.TryParseHtmlString("FFFFFF", out newColor);
+        m_Roof.SetColor("_Color", newColor);
         m_Roof.SetTexture("_MainTex", Resources.Load<Texture2D>(textureName));
     }
     public void SetWainscotTexture(string textureName)
     {
         m_Wainscot.SetTexture("_MainTex", Resources.Load<Texture2D>(textureName));
+        Color newColor = new Color();
+        ColorUtility.TryParseHtmlString("FFFFFF", out newColor);
+        m_Wainscot.SetColor("_Color", newColor);
     }
 
 }

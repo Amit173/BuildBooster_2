@@ -37,6 +37,19 @@ public class Manager : MonoBehaviour
         // disable WebGLInput.captureAllKeyboardInput so elements in web page can handle keyboard inputs
         WebGLInput.captureAllKeyboardInput = false;
 #endif
+        Color newColor = new Color();
+        ColorUtility.TryParseHtmlString("EEECEF", out newColor);
+        m_Roof.SetTexture("_MainTex", null);
+        m_Roof.SetColor("_Color",newColor);
+
+        m_Wall.SetTexture("_MainTex", null);
+        m_Wall.SetColor("_Color", newColor);
+
+        m_Wainscot.SetTexture("_MainTex", null);
+        m_Wainscot.SetColor("_Color", newColor);
+
+        m_Trim.SetTexture("_MainTex", null);
+        m_Trim.SetColor("_Color",newColor);
     }
 
     public void SetCurrentPart(Part part)
