@@ -220,8 +220,9 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("north");
             finalPosition = new Vector3((Manager.instance.width/2)*positionMarker, 0 , 0);
-            doorLocationSlider.minValue = doorPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.size.x / 2;
-            doorLocationSlider.maxValue = Manager.instance.width * positionMarker - doorPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.size.x / 2;
+            doorLocationSlider.minValue = 0;
+            doorLocationSlider.maxValue = Manager.instance.width * positionMarker;
+            doorLocationSlider.value = (Manager.instance.width / 2) * positionMarker;
             finalRot = new Vector3(0,90,0);
             // offset = something;
         }
@@ -229,6 +230,9 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("east");
             finalPosition = new Vector3((Manager.instance.width ) * positionMarker, 0, (Manager.instance.length/2)*positionMarker);
+            doorLocationSlider.minValue = 0;
+            doorLocationSlider.maxValue = Manager.instance.length * positionMarker;
+            doorLocationSlider.value = (Manager.instance.length / 2) * positionMarker;
             finalRot = new Vector3(0, 0, 0);
             // offset = something;
         }
@@ -236,6 +240,9 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("south");
             finalPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, (Manager.instance.length) * positionMarker);
+            //doorLocationSlider.minValue = 0;
+            //doorLocationSlider.maxValue = Manager.instance.width * positionMarker;
+            //doorLocationSlider.value = (Manager.instance.width / 2) * positionMarker;
             finalRot = new Vector3(0, -90, 0);
             // offset = something;
         }
@@ -243,6 +250,9 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("west");
             finalPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
+            //doorLocationSlider.minValue = 0;
+            //doorLocationSlider.maxValue = Manager.instance.length * positionMarker;
+            //doorLocationSlider.value = (Manager.instance.length / 2) * positionMarker;
             finalRot = new Vector3(0, 180, 0);
             // offset = something;
         }
@@ -369,29 +379,29 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("north");
             Transform door = currentWall.wallReference.transform.Find("Door(Clone)");
-            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((Manager.instance.width / 2) * positionMarker + (sliderValue*positionMarker), 0, 0);
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((sliderValue), 0, 0);
            // finalRot = new Vector3(0, 90, 0);
             // offset = something;
         }
         else if (currentWall == east)
         {
             Debug.Log("east");
-           // finalPosition = new Vector3((Manager.instance.width) * positionMarker, 0, (Manager.instance.length / 2) * positionMarker);
-           // finalRot = new Vector3(0, 0, 0);
-            // offset = something;
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((Manager.instance.width)*positionMarker, 0, sliderValue);
         }
         else if (currentWall == south)
         {
             Debug.Log("south");
-           // finalPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, (Manager.instance.length) * positionMarker);
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((sliderValue), 0, (Manager.instance.length)*positionMarker);
+            // finalPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, (Manager.instance.length) * positionMarker);
             //finalRot = new Vector3(0, -90, 0);
             // offset = something;
         }
         else if (currentWall == west)
         {
             Debug.Log("west");
-           // finalPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
-           // finalRot = new Vector3(0, 180, 0);
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(0, 0, (sliderValue));
+            // finalPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
+            // finalRot = new Vector3(0, 180, 0);
             // offset = something;
         }
 
