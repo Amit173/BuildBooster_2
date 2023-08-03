@@ -39,7 +39,6 @@ public class Building : MonoBehaviour
         roofPitch = RP;
         this.transform.localPosition = new Vector3(width * positionMarker / 2, 0, length * positionMarker / 2);
         this.transform.localPosition = this.transform.localPosition + Vector3.up * (height / 4);
-
         TrimMaker();
         NorthWallMaker();
         EastWallMaker();
@@ -47,6 +46,8 @@ public class Building : MonoBehaviour
         SouthWallMaker();
         RoofMaker();
         WainscotMaker();
+        Manager.instance.addEntityScript.updateDoorPositions();
+        Manager.instance.addEntityScript.updateWindowPositions();
     }
 
     private void SouthWallMaker()
