@@ -389,8 +389,6 @@ public class AddEntity : MonoBehaviour
             Debug.Log("north");
             Transform door = currentWall.wallReference.transform.Find("Door(Clone)");
             currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((sliderValue), 0, 0);
-           // finalRot = new Vector3(0, 90, 0);
-            // offset = something;
         }
         else if (currentWall == east)
         {
@@ -401,17 +399,11 @@ public class AddEntity : MonoBehaviour
         {
             Debug.Log("south");
             currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((sliderValue), 0, (Manager.instance.length)*positionMarker);
-            // finalPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, (Manager.instance.length) * positionMarker);
-            //finalRot = new Vector3(0, -90, 0);
-            // offset = something;
         }
         else if (currentWall == west)
         {
             Debug.Log("west");
             currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(0, 0, (sliderValue));
-            // finalPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
-            // finalRot = new Vector3(0, 180, 0);
-            // offset = something;
         }
 
 
@@ -434,6 +426,7 @@ public class AddEntity : MonoBehaviour
     [SerializeField] GameObject windowPrefab;
     float initialWindowWidth = 4;
     float initialWindowHeight = 4;
+
     private void AddWindow()
     {
         currentWall.windowCount++;
@@ -446,7 +439,54 @@ public class AddEntity : MonoBehaviour
         if (currentWall.windowCount < 10)
         {
             windowCountText.text = currentWall.windowCount.ToString();
-            InstantiateWindow(currentWall.wallReference.transform.position, currentWall.wallReference.transform.localEulerAngles);
+            Vector3 offset = Vector3.zero;
+            Vector3 finalPosition = Vector3.zero;
+            Vector3 finalRot = Vector3.zero;
+            float windowHeight = (Manager.instance.height / 2) * positionMarker;
+            float sliderMin = 0;
+            float sliderMax = 0;
+            float sliderCurr = 0;
+            if (currentWall == north)
+            {
+                Debug.Log("north");
+                finalPosition = new Vector3((Manager.instance.width / 4) * positionMarker, windowHeight / 2, 0);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.width / 2) * positionMarker;
+                finalRot = new Vector3(0, 90, 0);
+                // offset = something;
+            }
+            else if (currentWall == east)
+            {
+                Debug.Log("east");
+                finalPosition = new Vector3((Manager.instance.width) * positionMarker, windowHeight / 2, (Manager.instance.length / 4) * positionMarker);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.length / 2) * positionMarker;
+                finalRot = new Vector3(0, 0, 0);
+                // offset = something;
+            }
+            else if (currentWall == south)
+            {
+                Debug.Log("south");
+                finalPosition = new Vector3((Manager.instance.width / 4) * positionMarker, windowHeight/2, (Manager.instance.length) * positionMarker);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.width / 2) * positionMarker;
+                finalRot = new Vector3(0, -90, 0);
+                // offset = something;
+            }
+            else if (currentWall == west)
+            {
+                Debug.Log("west");
+                finalPosition = new Vector3(0, windowHeight/2, (Manager.instance.length / 4) * positionMarker);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.length / 2) * positionMarker;
+                finalRot = new Vector3(0, 180, 0);
+                // offset = something;
+            }
+            InstantiateWindow(finalPosition, finalRot);
         }
         if (currentWall.windowCount >= 10)
         {
@@ -485,8 +525,6 @@ public class AddEntity : MonoBehaviour
         currentWall.SetWindowData(instantiatedWindow, initialWindowWidth, initialWindowHeight, 0.0f, 0.0f);
         // add in heirarchy
         currentWall.windows[currentWall.windowCount - 1].windowReference.transform.parent = currentWall.wallReference.transform;
-
-        
     }
 
 
