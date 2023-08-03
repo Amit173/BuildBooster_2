@@ -339,6 +339,15 @@ MonoBehaviour:
       middleOffset: 0
     windowCount: 0
     windows: []
+  currentWall:
+    wallReference: {fileID: 0}
+    door:
+      doorReference: {fileID: 0}
+      width: 0
+      height: 0
+      middleOffset: 0
+    windowCount: 0
+    windows: []
   northToggle: {fileID: 7796502310997214166}
   eastToggle: {fileID: 7796502309874791378}
   westToggle: {fileID: 7796502310136356794}
@@ -1675,6 +1684,10 @@ MonoBehaviour:
   - {fileID: 0}
   trim: {fileID: 919132149155446097, guid: ad3f05ba988df3441b212a28d6d1478a, type: 3}
   tin: {fileID: 919132149155446097, guid: e9ba204349d78814297d2439a61ff168, type: 3}
+  nothWall: {fileID: 0}
+  southWall: {fileID: 0}
+  westWall: {fileID: 0}
+  eastWall: {fileID: 0}
   positionMarker: 0.3048
   width: 51
   length: 50

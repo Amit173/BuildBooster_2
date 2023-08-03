@@ -10,7 +10,7 @@ public class AddEntity : MonoBehaviour
     public Wall south;
     public Wall west;
 
-    Wall currentWall;
+    public Wall currentWall;
 
     [SerializeField] Toggle northToggle;
     [SerializeField] Toggle eastToggle;
@@ -58,9 +58,18 @@ public class AddEntity : MonoBehaviour
         addWindow.onClick.AddListener(AddWindow);
         removeWindow.onClick.AddListener(RemoveWindow);
     }
-
+    public void Deinit()
+    {
+        Debug.Log("Deinit");
+        north.SetWallReference(null);
+        east.SetWallReference(null);
+        south.SetWallReference(null);
+        west.SetWallReference(null);
+        CheckWallData(north);
+    }
     public void InitiializeWalls()
     {
+
         north = new Wall();
         east = new Wall();
         south = new Wall();
@@ -68,13 +77,13 @@ public class AddEntity : MonoBehaviour
 
         currentWall = new Wall();
 
-        north.SetWallReference(building.transform.Find(northWallName).gameObject);
-        east.SetWallReference(building.transform.Find(eastWallName).gameObject);
-        south.SetWallReference(building.transform.Find(southWallName).gameObject);
-        west.SetWallReference(building.transform.Find(westWallName).gameObject);
+        //north.SetWallReference(building.transform.Find(northWallName).gameObject);
+        //east.SetWallReference(building.transform.Find(eastWallName).gameObject);
+        //south.SetWallReference(building.transform.Find(southWallName).gameObject);
+        //west.SetWallReference(building.transform.Find(westWallName).gameObject);
         currentWall = north; // default
-
         Debug.Log("walls initialized");
+        CheckWallData(north);
     }
 
     #region SideToggles
@@ -548,7 +557,7 @@ public class AddEntity : MonoBehaviour
         }
     }
 
-    private void CheckWallData(Wall wall)
+    public void CheckWallData(Wall wall)
     {
         wall.PrintWallData();
     }

@@ -8,6 +8,11 @@ public class Building : MonoBehaviour
     public List<Part> parts = new List<Part>();
     public GameObject trim;
     public GameObject tin;
+
+    public GameObject nothWall;
+    public GameObject southWall;
+    public GameObject westWall;
+    public GameObject eastWall;
     
     public float positionMarker = 0.3048f;
     public float width;
@@ -52,6 +57,7 @@ public class Building : MonoBehaviour
     {
         GameObject Parent = new GameObject("SouthWall");
         Parent.transform.parent = this.transform;
+        southWall = Parent;
         if(width%2 ==0)
         {
             for (int i = 0; i < width / 2; i++)
@@ -242,6 +248,7 @@ public class Building : MonoBehaviour
     {
         GameObject Parent = new GameObject("NorthWall");
         Parent.transform.parent = this.transform;
+        nothWall = Parent;
         if (width % 2 == 0)
         {
             for (int i = 0; i < width / 2; i++)
@@ -438,6 +445,7 @@ public class Building : MonoBehaviour
     {
         GameObject Parent = new GameObject("WestWall");
         Parent.transform.parent = this.transform;
+        westWall = Parent;
         for (int i = 0; i < length; i++)
         {
             GameObject leftWallPart = Instantiate(tin, new Vector3(0, 0, positionMarker * i), Quaternion.Euler(new Vector3(0, 90, 0)), Parent.transform);
@@ -450,6 +458,7 @@ public class Building : MonoBehaviour
     {
         GameObject Parent = new GameObject("EastWall");
         Parent.transform.parent = this.transform;
+        eastWall = Parent;
         for (int i = 0; i < length; i++)
         {
             GameObject rightWallPart = Instantiate(tin, new Vector3(width * positionMarker, 0, positionMarker * (length - i)), Quaternion.Euler(new Vector3(0, -90, 0)), Parent.transform);
@@ -551,6 +560,12 @@ public class Building : MonoBehaviour
             backWainscotPart.GetComponent<MeshRenderer>().material = m_Wainscot;
             m_Wainscot.SetTexture("_BumpMap", Resources.Load<Texture2D>("tin_normal"));
         }
+       //Manager.instance.addEntityScript.InitiializeWalls();
+         Manager.instance.addEntityScript.north.SetWallReference(nothWall);
+         Manager.instance.addEntityScript.east.SetWallReference(eastWall);
+         Manager.instance.addEntityScript.south.SetWallReference(southWall);
+         Manager.instance.addEntityScript.west.SetWallReference(westWall);
+         Manager.instance.addEntityScript.currentWall = Manager.instance.addEntityScript.north;
     }
 
     public void SetWallColor(string colorCode)
