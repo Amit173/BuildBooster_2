@@ -74,11 +74,16 @@ public class Manager : MonoBehaviour
         height = float.Parse(arr[2]);
         roofPitch = float.Parse(arr[3]);
         wareHouse.BuildingMaker(width, length, height, roofPitch);
+        addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
+        //addEntityScript.updateDoorPositions();
+       // addEntityScript.updateWindowPositions();
     }
     public void MakeBuilding()
     {
         wareHouse.BuildingMaker(width,length,height,roofPitch);
         addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
+        addEntityScript.updateDoorPositions();
+        addEntityScript.updateWindowPositions();
     }
 
     public void ChangeColor(string str)

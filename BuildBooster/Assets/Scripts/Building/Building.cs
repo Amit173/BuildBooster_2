@@ -46,8 +46,6 @@ public class Building : MonoBehaviour
         SouthWallMaker();
         RoofMaker();
         WainscotMaker();
-        Manager.instance.addEntityScript.updateDoorPositions();
-        Manager.instance.addEntityScript.updateWindowPositions();
     }
 
     private void SouthWallMaker()

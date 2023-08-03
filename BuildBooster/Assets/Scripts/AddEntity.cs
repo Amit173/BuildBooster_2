@@ -555,18 +555,31 @@ public class AddEntity : MonoBehaviour
 
     public void updateDoorPositions()
     {
-        north.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, 0);
-        east.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3((Manager.instance.width) * positionMarker, 0, (Manager.instance.length / 2) * positionMarker);
-        south.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
-        west.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
+        Debug.Log(north.wallReference.transform.Find("Door(Clone)"));
+        
+        if(north.wallReference.transform.Find("Door(Clone)"))
+        {
+            north.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, 0);
+        }
+       if(east.wallReference.transform.Find("Door(Clone)"))
+            east.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3((Manager.instance.width) * positionMarker, 0, (Manager.instance.length / 2) * positionMarker);
+       if(south.wallReference.transform.Find("Door(Clone)"))
+            south.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
+        if (west.wallReference.transform.Find("Door(Clone)"))
+            west.wallReference.transform.Find("Door(Clone)").transform.localPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
     }
 
     public void updateWindowPositions()
     {
         windowHeight = (Manager.instance.height / 2) * positionMarker;
+        if(north.wallReference.transform.Find("Window(Clone)"))
         north.wallReference.transform.Find("Window(Clone)").transform.localPosition = new Vector3((Manager.instance.width / 4) * positionMarker, windowHeight / 2, 0);
-        east.wallReference.transform.Find("Window(Clone)").transform.localPosition = new Vector3((Manager.instance.width) * positionMarker, windowHeight / 2, (Manager.instance.length / 4) * positionMarker);
-        south.wallReference.transform.Find("Window(Clone)").transform.localPosition = new Vector3((Manager.instance.width / 4) * positionMarker, windowHeight / 2, (Manager.instance.length) * positionMarker);
+      
+        if (east.wallReference.transform.Find("Window(Clone)"))
+            east.wallReference.transform.Find("Window(Clone)").transform.localPosition = new Vector3((Manager.instance.width) * positionMarker, windowHeight / 2, (Manager.instance.length / 4) * positionMarker);
+        if(south.wallReference.transform.Find("Window(Clone)"))
+            south.wallReference.transform.Find("Window(Clone)").transform.localPosition = new Vector3((Manager.instance.width / 4) * positionMarker, windowHeight / 2, (Manager.instance.length) * positionMarker);
+        if(west.wallReference.transform.Find("Window(Clone)"))
         west.wallReference.transform.Find("Window(Clone)").transform.localPosition = new Vector3(0, windowHeight / 2, (Manager.instance.length / 4) * positionMarker);
     }
 }
