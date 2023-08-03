@@ -1,4 +1,4 @@
- using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class AddEntity : MonoBehaviour
@@ -17,6 +17,11 @@ public class AddEntity : MonoBehaviour
     [SerializeField] Toggle westToggle;
     [SerializeField] Toggle southToggle;
 
+    [SerializeField] string northWallName;
+    [SerializeField] string eastWallName;
+    [SerializeField] string westWallName;
+    [SerializeField] string southWallName;
+
     [SerializeField] Button addDoor;
     [SerializeField] Button removeDoor;
 
@@ -29,21 +34,10 @@ public class AddEntity : MonoBehaviour
     public Slider doorLocationSlider;
     Vector3 doorScaleValue;
 
+    public float positionMarker = 0.3048f;
+
     private void Start()
     {
-        north = new Wall();
-        east = new Wall();
-        south = new Wall();
-        west = new Wall();
-
-        currentWall = new Wall();
-
-        north.SetWallReference(building.transform.Find("North").gameObject);
-        east.SetWallReference(building.transform.Find("East").gameObject);
-        south.SetWallReference(building.transform.Find("South").gameObject);
-        west.SetWallReference(building.transform.Find("West").gameObject);
-        currentWall = north; // default
-
         // UI
         northToggle.isOn = true;
         eastToggle.isOn = false;
@@ -63,6 +57,24 @@ public class AddEntity : MonoBehaviour
 
         addWindow.onClick.AddListener(AddWindow);
         removeWindow.onClick.AddListener(RemoveWindow);
+    }
+
+    public void InitiializeWalls()
+    {
+        north = new Wall();
+        east = new Wall();
+        south = new Wall();
+        west = new Wall();
+
+        currentWall = new Wall();
+
+        north.SetWallReference(building.transform.Find(northWallName).gameObject);
+        east.SetWallReference(building.transform.Find(eastWallName).gameObject);
+        south.SetWallReference(building.transform.Find(southWallName).gameObject);
+        west.SetWallReference(building.transform.Find(westWallName).gameObject);
+        currentWall = north; // default
+
+        Debug.Log("walls initialized");
     }
 
     #region SideToggles
@@ -200,7 +212,61 @@ public class AddEntity : MonoBehaviour
         removeDoor.interactable = true;
 
         // 3D
-        InstantiateDoor(currentWall.wallReference.transform.localPosition, currentWall.wallReference.transform.localEulerAngles);
+        Vector3 currentWallPosition = currentWall.wallReference.transform.localPosition;
+        Vector3 offset = Vector3.zero;
+        Vector3 finalPosition = Vector3.zero;
+        Vector3 finalRot = Vector3.zero;
+
+        float sliderMin = 0;
+        float sliderMax = 0;
+        float sliderCurr = 0;
+
+        if (currentWall == north)
+        {
+            Debug.Log("north");
+            finalPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, 0);
+            sliderMin = int.Parse(doorWidth.text) * positionMarker;
+            sliderMax = Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+            sliderCurr = (Manager.instance.width / 2) * positionMarker;
+            finalRot = new Vector3(0, 90, 0);
+            // offset = something;
+        }
+        else if (currentWall == east)
+        {
+            Debug.Log("east");
+            finalPosition = new Vector3((Manager.instance.width) * positionMarker, 0, (Manager.instance.length / 2) * positionMarker);
+            sliderMin = int.Parse(doorWidth.text) * positionMarker;
+            sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+            sliderCurr = (Manager.instance.length / 2) * positionMarker;
+            finalRot = new Vector3(0, 0, 0);
+            // offset = something;
+        }
+        else if (currentWall == south)
+        {
+            Debug.Log("south");
+            finalPosition = new Vector3((Manager.instance.width / 2) * positionMarker, 0, (Manager.instance.length) * positionMarker);
+            sliderMin = int.Parse(doorWidth.text) * positionMarker;
+            sliderMax = Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+            sliderCurr = (Manager.instance.width / 2) * positionMarker;
+            finalRot = new Vector3(0, -90, 0);
+            // offset = something;
+        }
+        else if (currentWall == west)
+        {
+            Debug.Log("west");
+            finalPosition = new Vector3(0, 0, (Manager.instance.length / 2) * positionMarker);
+            sliderMin = int.Parse(doorWidth.text) * positionMarker;
+            sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+            sliderCurr = (Manager.instance.length / 2) * positionMarker;
+            finalRot = new Vector3(0, 180, 0);
+            // offset = something;
+        }
+
+        InstantiateDoor(finalPosition, finalRot);
+
+        doorLocationSlider.minValue = sliderMin;
+        doorLocationSlider.maxValue = sliderMax;
+        doorLocationSlider.value = sliderCurr;
 
         if (doorWidth.onValueChanged.GetPersistentEventCount() == 0)
         {
@@ -312,20 +378,44 @@ public class AddEntity : MonoBehaviour
 
     private void OnDoorSliderValueChanged(float sliderValue)
     {
+        Debug.Log("OnSliderValue :-" + sliderValue);
         Vector3 currPosition = currentWall.wallReference.transform.Find("Door(Clone)").localPosition;
         doorScaleValue = currentWall.door.doorReference.transform.localScale;
 
         float limit = 1 - doorScaleValue.x;
         // change in 3D
-        if (sliderValue <= limit && sliderValue >= -limit)
-            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(currPosition.x, currPosition.y, sliderValue * -0.5f);
-        else if (sliderValue > limit)
-            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(currPosition.x, currPosition.y, -0.5f * limit);
-        else if (sliderValue < -limit)
-            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(currPosition.x, currPosition.y, 0.5f * limit);
+        if (currentWall == north)
+        {
+            Debug.Log("north");
+            Transform door = currentWall.wallReference.transform.Find("Door(Clone)");
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((sliderValue), 0, 0);
+        }
+        else if (currentWall == east)
+        {
+            Debug.Log("east");
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((Manager.instance.width) * positionMarker, 0, sliderValue);
+        }
+        else if (currentWall == south)
+        {
+            Debug.Log("south");
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3((sliderValue), 0, (Manager.instance.length) * positionMarker);
+        }
+        else if (currentWall == west)
+        {
+            Debug.Log("west");
+            currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(0, 0, (sliderValue));
+        }
+
+
+        //if (sliderValue <= limit && sliderValue >= -limit)
+        //    currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(currPosition.x, currPosition.y, sliderValue * -0.5f);
+        //else if (sliderValue > limit)
+        //    currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(currPosition.x, currPosition.y, -0.5f * limit);
+        //else if (sliderValue < -limit)
+        //    currentWall.wallReference.transform.Find("Door(Clone)").localPosition = new Vector3(currPosition.x, currPosition.y, 0.5f * limit);
 
         // save in database
-        currentWall.door.UpdateLocation(-currentWall.wallReference.transform.Find("Door(Clone)").localPosition.z);
+        //currentWall.door.UpdateLocation(-currentWall.wallReference.transform.Find("Door(Clone)").localPosition.z);
 
         CheckWallData(currentWall);
     }
@@ -336,6 +426,7 @@ public class AddEntity : MonoBehaviour
     [SerializeField] GameObject windowPrefab;
     float initialWindowWidth = 4;
     float initialWindowHeight = 4;
+
     private void AddWindow()
     {
         currentWall.windowCount++;
@@ -348,7 +439,54 @@ public class AddEntity : MonoBehaviour
         if (currentWall.windowCount < 10)
         {
             windowCountText.text = currentWall.windowCount.ToString();
-            InstantiateWindow(currentWall.wallReference.transform.position, currentWall.wallReference.transform.localEulerAngles);
+            Vector3 offset = Vector3.zero;
+            Vector3 finalPosition = Vector3.zero;
+            Vector3 finalRot = Vector3.zero;
+            float windowHeight = (Manager.instance.height / 2) * positionMarker;
+            float sliderMin = 0;
+            float sliderMax = 0;
+            float sliderCurr = 0;
+            if (currentWall == north)
+            {
+                Debug.Log("north");
+                finalPosition = new Vector3((Manager.instance.width / 4) * positionMarker, windowHeight / 2, 0);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.width / 2) * positionMarker;
+                finalRot = new Vector3(0, 90, 0);
+                // offset = something;
+            }
+            else if (currentWall == east)
+            {
+                Debug.Log("east");
+                finalPosition = new Vector3((Manager.instance.width) * positionMarker, windowHeight / 2, (Manager.instance.length / 4) * positionMarker);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.length / 2) * positionMarker;
+                finalRot = new Vector3(0, 0, 0);
+                // offset = something;
+            }
+            else if (currentWall == south)
+            {
+                Debug.Log("south");
+                finalPosition = new Vector3((Manager.instance.width / 4) * positionMarker, windowHeight / 2, (Manager.instance.length) * positionMarker);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.width * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.width / 2) * positionMarker;
+                finalRot = new Vector3(0, -90, 0);
+                // offset = something;
+            }
+            else if (currentWall == west)
+            {
+                Debug.Log("west");
+                finalPosition = new Vector3(0, windowHeight / 2, (Manager.instance.length / 4) * positionMarker);
+                sliderMin = int.Parse(doorWidth.text) * positionMarker;
+                sliderMax = Manager.instance.length * positionMarker - int.Parse(doorWidth.text) * positionMarker;
+                sliderCurr = (Manager.instance.length / 2) * positionMarker;
+                finalRot = new Vector3(0, 180, 0);
+                // offset = something;
+            }
+            InstantiateWindow(finalPosition, finalRot);
         }
         if (currentWall.windowCount >= 10)
         {
@@ -374,7 +512,7 @@ public class AddEntity : MonoBehaviour
         ResetAddWindowUI(currentWall);
 
         CheckWallData(currentWall);
-        
+
     }
     public void InstantiateWindow(Vector3 position, Vector3 eulerAngle)
     {
@@ -387,8 +525,6 @@ public class AddEntity : MonoBehaviour
         currentWall.SetWindowData(instantiatedWindow, initialWindowWidth, initialWindowHeight, 0.0f, 0.0f);
         // add in heirarchy
         currentWall.windows[currentWall.windowCount - 1].windowReference.transform.parent = currentWall.wallReference.transform;
-
-        
     }
 
 
