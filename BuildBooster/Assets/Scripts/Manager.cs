@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using UnityEngine;
 public class Manager : MonoBehaviour
 {
@@ -18,6 +17,8 @@ public class Manager : MonoBehaviour
     public Material m_Roof;
     public Material m_Trim;
     public Material m_Wainscot;
+
+    public AddEntity addEntityScript;
 
     private void Awake()
     {
@@ -77,6 +78,7 @@ public class Manager : MonoBehaviour
     public void MakeBuilding()
     {
         wareHouse.BuildingMaker(width,length,height,roofPitch);
+        addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
     }
 
     public void ChangeColor(string str)
