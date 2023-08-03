@@ -343,10 +343,10 @@ MonoBehaviour:
   eastToggle: {fileID: 7796502309874791378}
   westToggle: {fileID: 7796502310136356794}
   southToggle: {fileID: 7796502310194745329}
-  northWallName: 
-  eastWallName: 
-  westWallName: 
-  southWallName: 
+  northWallName: NorthWall
+  eastWallName: EastWall
+  westWallName: WestWall
+  southWallName: SouthWall
   addDoor: {fileID: 7796502310784238860}
   removeDoor: {fileID: 7796502309655588518}
   doorPrefab: {fileID: 6721466877018762534, guid: dd56d76da7f759a4fbacb6149d47e893, type: 3}
@@ -1173,7 +1173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1355654265
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4853,7 +4853,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Door
+  m_Text: Door and Windows
 --- !u!222 &7796502310906146663
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4897,7 +4897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000076293945, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7796502310910224358
@@ -5849,8 +5849,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 30, y: 0}
-  m_SizeDelta: {x: 150, y: 60}
+  m_AnchoredPosition: {x: 30, y: -75}
+  m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7796502311218810926
 CanvasRenderer:
@@ -6824,7 +6824,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 112.60626, y: 83.76829}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 108.5703, y: 52.6733}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7796502311706589704
