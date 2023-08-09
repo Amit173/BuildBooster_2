@@ -39,7 +39,7 @@ public class Manager : MonoBehaviour
         WebGLInput.captureAllKeyboardInput = false;
 #endif
         Color newColor = new Color();
-        ColorUtility.TryParseHtmlString("B2BEB5", out newColor);
+        ColorUtility.TryParseHtmlString("#B2BEB5", out newColor);
         m_Roof.SetTexture("_MainTex", null);
         m_Roof.SetColor("_Color",newColor);
 
