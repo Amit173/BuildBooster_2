@@ -268,6 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 560032926}
   - component: {fileID: 560032927}
+  - component: {fileID: 560032928}
   m_Layer: 0
   m_Name: AddEntity
   m_TagString: Untagged
@@ -367,6 +368,36 @@ MonoBehaviour:
   removeWindow: {fileID: 7796502311706589707}
   windowCountText: {fileID: 7796502311697007266}
   windowPrefab: {fileID: 1693537941715638056, guid: 580c17bfe0324064785a8aae590f5801, type: 3}
+--- !u!114 &560032928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560032925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b781fe673a5534e91b1e802df4b9362e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importSettings:
+    nodeNameMethod: 0
+    animationMethod: 1
+    generateMipMaps: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  url: 
+  loadOnStartup: 1
+  sceneId: -1
+  playAutomatically: 1
+  streamingAsset: 0
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
