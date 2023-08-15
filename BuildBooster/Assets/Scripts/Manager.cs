@@ -56,42 +56,25 @@ public class Manager : MonoBehaviour
     public void SetCurrentPart(Part part)
     {
         currentSelectedPart = part;
-        //if (part != null)
-        //{
-        //    part = null;
-        //    currentSelectedPart = part;
-        //} else
-        //{
-            
-        //}
     }
 
     public void MakeWareHouse(string value)
     {
         string[] arr = value.Split(',');
+
         width = float.Parse(arr[0]);
         length = float.Parse(arr[1]);
         height = float.Parse(arr[2]);
         roofPitch = float.Parse(arr[3]);
-        //if (addEntityScript.north.wallReference != null)
-        //{
-        //    Debug.Log("IF ke ander hu");
-        //    addEntityScript.Deinit();
-        //}
+
         wareHouse.BuildingMaker(width, length, height, roofPitch);
-        //addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
-        //addEntityScript.updateDoorPositions();
-       //addEntityScript.updateWindowPositions();
     }
     public void MakeBuilding()
     {
-        //addEntityScript.Deinit();
         wareHouse.BuildingMaker(width,length,height,roofPitch);
-        //addEntityScript.CheckWallData(addEntityScript.north);
-       // addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
-        //addEntityScript.CheckWallData(addEntityScript.north);
-        addEntityScript.updateDoorPositions();
-        addEntityScript.updateWindowPositions();
+
+        addEntityScript.UpdateDoorPositions();
+        addEntityScript.UpdateWindowPositions();
     }
 
     public void ChangeColor(string str)
@@ -148,12 +131,4 @@ public class Manager : MonoBehaviour
                 }
         }
     }
-
-    //Method For Java fuction call
-    //    void CallJavaScriptFunction(bool b)
-    //    {
-    //#if UNITY_WEBGL && !UNITY_EDITOR
-    //    StringReturnValueFunction(b.ToString());
-    //#endif
-    //    }
 }
