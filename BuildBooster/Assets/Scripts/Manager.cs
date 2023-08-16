@@ -68,28 +68,16 @@ public class Manager : MonoBehaviour
 
     public void MakeWareHouse(string value)
     {
-        string[] arr = value.Split(',');
+        string[] arr = value.Split('_');
         width = float.Parse(arr[0]);
         length = float.Parse(arr[1]);
         height = float.Parse(arr[2]);
         roofPitch = float.Parse(arr[3]);
-        //if (addEntityScript.north.wallReference != null)
-        //{
-        //    Debug.Log("IF ke ander hu");
-        //    addEntityScript.Deinit();
-        //}
         wareHouse.BuildingMaker(width, length, height, roofPitch);
-        //addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
-        //addEntityScript.updateDoorPositions();
-       //addEntityScript.updateWindowPositions();
     }
     public void MakeBuilding()
     {
-        //addEntityScript.Deinit();
         wareHouse.BuildingMaker(width,length,height,roofPitch);
-        //addEntityScript.CheckWallData(addEntityScript.north);
-       // addEntityScript.GetComponent<AddEntity>().InitiializeWalls();
-        //addEntityScript.CheckWallData(addEntityScript.north);
         addEntityScript.updateDoorPositions();
         addEntityScript.updateWindowPositions();
     }
