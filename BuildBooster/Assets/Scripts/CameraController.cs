@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
     private float zoomFactor;
     private void Start()
     {
-        zoom = camera.fieldOfView;
+        zoom = 0;
     }
 
     void Update()
